@@ -147,6 +147,20 @@ jobs:
       - name: Verify AWS Identity
         run: aws sts get-caller-identity
 
+        
+      - name: Debug GitHub OIDC Claims
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const token = await core.getIDToken('sts.amazonaws.com');
+            const payload = JSON.parse(
+              Buffer.from(token.split('.')[1], 'base64url').toString()
+            );
+
+            console.log('OIDC Issuer:', payload.iss);
+            console.log('OIDC Audience:', payload.aud);
+            console.log('OIDC Subject:', payload.sub);
+
       # ==========================================================
       # TERRAFORM SETUP
       # ==========================================================
