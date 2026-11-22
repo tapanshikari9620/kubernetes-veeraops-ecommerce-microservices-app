@@ -125,7 +125,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::079059455177:role/GitHubActionsEcommerceRole
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: us-east-1
           role-session-name: GitHubActionsTerraform
 
       - name: Verify AWS Identity
